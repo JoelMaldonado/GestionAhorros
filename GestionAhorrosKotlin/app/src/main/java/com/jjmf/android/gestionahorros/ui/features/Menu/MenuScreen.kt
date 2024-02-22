@@ -11,10 +11,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -24,6 +26,8 @@ import com.jjmf.android.gestionahorros.ui.features.Cuentas.CuentasScreen
 import com.jjmf.android.gestionahorros.ui.features.Inicio.InicioScreen
 import com.jjmf.android.gestionahorros.ui.features.Menu.components.MenuDrawer
 import com.jjmf.android.gestionahorros.ui.navigation.Rutas
+import com.jjmf.android.gestionahorros.ui.theme.ColorP1
+import com.jjmf.android.gestionahorros.ui.theme.ColorP2
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,7 +71,12 @@ fun MenuScreen() {
                 },
                 title = {
                     Text(text = "Inicio")
-                }
+                },
+                colors = TopAppBarDefaults.largeTopAppBarColors(
+                    containerColor = ColorP1,
+                    titleContentColor = Color.White,
+                    navigationIconContentColor = Color.White
+                )
             )
 
             NavHost(navController = navMenu, startDestination = Rutas.Inicio.route) {

@@ -2,10 +2,19 @@ package com.jjmf.android.gestionahorros.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val ColorP1 = Color(0xFF1976D2)
+val ColorP2 = Color(0xFF2293ee)
+val ColorP3 = Color(0xFF38aff9)
+val ColorP4 = Color(0xFF5ecbfc)
+val ColorP5 = Color(0xFF91dfff)
+val ColorP6 = Color(0xFFbeebff)
+val ColorP7 = Color(0xFFdaf3ff)
+val ColorP8 = Color(0xFFeffaff)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+
+val ColorS1 = Color(0xFFff9800)
+val ColorS2 = Color(0xFFffbc1b)
+val ColorS3 = Color(0xFFffd146)
+val ColorS4 = Color(0xFFffe585)
+
+val ColorTitulo = Color(0xFF163355)

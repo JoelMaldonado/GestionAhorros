@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jjmf.android.gestionahorros.ui.theme.ColorS1
 
 @Composable
 fun InicioScreen(
@@ -36,7 +37,8 @@ fun InicioScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp),
-            onClick = toAddRegistro
+            onClick = toAddRegistro,
+            containerColor = ColorS1
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = null)
         }
