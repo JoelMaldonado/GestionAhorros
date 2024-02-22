@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jjmf.android.gestionahorros.app.BaseApp.Companion.prefs
+import com.jjmf.android.gestionahorros.core.Result
 import com.jjmf.android.gestionahorros.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,13 +33,14 @@ class LoginViewModel @Inject constructor(
                 isLoading = true
                 delay(1000)
                 val res = repository.login(usuario, clave)
-                if (res.isSuccess){
-                    res.getOrNull()?.let {
-                        prefs.saveToken(it)
+                when(res){
+                    is Result.Correcto -> {
+                        prefs.saveToken(res.datos.toString())
                         toMenu = true
-                    } ?: run {
-                        Log.d("tagito", res.getOrThrow())
-                        error = res.getOrThrow()
+                    }
+                    is Result.Error -> {
+                        Log.d("tagito", res.mensaje.toString())
+                        error = res.mensaje
                     }
                 }
             } catch (e: Exception) {

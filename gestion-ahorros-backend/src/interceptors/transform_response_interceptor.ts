@@ -20,7 +20,7 @@ export class TransformResponseInterceptor<T> implements NestInterceptor<T, any> 
                 new HttpException({
                   isSuccess: false,
                   message: error.response.message.join(', '),
-                  data: [],
+                  data: null,
                 }, HttpStatus.OK)
               );
             } else {
@@ -28,7 +28,7 @@ export class TransformResponseInterceptor<T> implements NestInterceptor<T, any> 
                 new HttpException({
                   isSuccess: false,
                   message: error.message || 'Error interno del servidor',
-                  data: [],
+                  data: null,
                 }, HttpStatus.OK)
               );
             }
@@ -37,7 +37,7 @@ export class TransformResponseInterceptor<T> implements NestInterceptor<T, any> 
               new HttpException({
                 isSuccess: false,
                 message: err.message || 'Error interno del servidor',
-                data: [],
+                data: null,
               }, HttpStatus.OK)
             );
           }

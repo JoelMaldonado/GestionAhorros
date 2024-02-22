@@ -9,9 +9,9 @@ data class LoginRequest(
 )
 
 data class Wrapper<T>(
-    val success: Boolean?,
-    val message:String?,
-    val data: T?
+    @SerializedName("isSuccess") val isSuccess: Boolean?,
+    @SerializedName("message") val message: String?,
+    @SerializedName("data") val data: T
 )
 
 data class LoginResponse(
