@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateCuentaDto } from './dto/create-cuenta.dto';
 import { UpdateCuentaDto } from './dto/update-cuenta.dto';
 import { Cuenta } from 'src/entities/cuenta.entity';
@@ -23,8 +23,7 @@ export class CuentaService {
   }
 
   async findAll(user:any) {
-    console.log(user);
-    
+    //throw new HttpException("Prueba", 200)
     return await this.repo.find({
       where: {
         usuario: {
@@ -35,7 +34,6 @@ export class CuentaService {
   }
 
   async findOne(id: number) {
-
     return await this.repo.findOne({
       where: {
         id

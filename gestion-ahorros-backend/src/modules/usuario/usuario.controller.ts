@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, HttpException, Param, ParseIntPipe, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, Param, ParseIntPipe, Patch, Res, UseGuards } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
+import { Response } from 'express';
 
 @ApiBearerAuth()
 @ApiTags("Usuario")
@@ -13,8 +14,19 @@ export class UsuarioController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getAllUsers() {
-    return await this.usuarioService.getAllUsers();
+  async getAllUsers(@Res() res: Response) {
+    try {
+      const data = await this.usuarioService.getAllUsers();
+      return res.json({
+        success: true,
+        data: data
+      })
+    } catch (error) {
+      return res.json({
+        success: false,
+        message: error.message
+      })
+    }
   }
 
   @UseGuards(JwtAuthGuard)
@@ -23,7 +35,7 @@ export class UsuarioController {
     try {
       return await this.usuarioService.updateUser(id, user)
     } catch (error) {
-      
+
       if (error instanceof HttpException) {
         throw error;
       } else {

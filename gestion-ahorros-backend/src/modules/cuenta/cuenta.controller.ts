@@ -1,16 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, HttpException, HttpStatus, Res } from '@nestjs/common';
 import { CuentaService } from './cuenta.service';
 import { CreateCuentaDto } from './dto/create-cuenta.dto';
 import { UpdateCuentaDto } from './dto/update-cuenta.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 
 @ApiBearerAuth()
 @ApiTags("Cuenta")
 @Controller('cuenta')
 export class CuentaController {
-  constructor(private readonly cuentaService: CuentaService) {}
+  constructor(private readonly cuentaService: CuentaService) { }
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -21,8 +21,19 @@ export class CuentaController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@Req() req: Request) {
-    return this.cuentaService.findAll(req.user);
+  async findAll(@Req() req: Request, @Res() res: Response) {
+    try {
+      const data = await this.cuentaService.findAll(req.user);
+      return res.json({
+        success: true,
+        data: data
+      })
+    } catch (error) {
+      return res.json({
+        success: false,
+        message: error.message
+      })
+    }
   }
 
   @UseGuards(JwtAuthGuard)

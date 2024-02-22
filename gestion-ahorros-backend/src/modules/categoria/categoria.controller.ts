@@ -1,15 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Res } from '@nestjs/common';
 import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
+import { Response } from 'express';
 
 @ApiBearerAuth()
 @ApiTags("Categoria")
 @Controller('categoria')
 export class CategoriaController {
-  constructor(private readonly categoriaService: CategoriaService) {}
+  constructor(private readonly categoriaService: CategoriaService) { }
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -20,8 +21,20 @@ export class CategoriaController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(@Req() req) {
-    return this.categoriaService.findAll(req.user.id);
+  async findAll(@Req() req, @Res() res: Response) {
+    try {
+      const data = await this.categoriaService.findAll(req.user.id);
+      return res.json({
+        success: true,
+        data: data
+      })
+    } catch (error) {
+      return res.json({
+        success: false,
+        message: error.message
+      })
+    }
+
   }
 
   @UseGuards(JwtAuthGuard)

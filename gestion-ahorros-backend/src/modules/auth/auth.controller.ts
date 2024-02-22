@@ -11,27 +11,39 @@ import { RegisterDto } from './dto/register.dto';
 @ApiTags("Auth")
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
-    return res.status(HttpStatus.OK).json(await this.authService.login(loginDto))
+    try {
+      const token = await this.authService.login(loginDto)
+      return res.json({
+        success: true,
+        data: token
+      })
+    } catch (error) {
+      return res.json({
+        sucscess: false,
+        message: error.message
+      });
+    }
   }
 
-  
+
 
   @Post('register')
-  async createUser(@Body() user: RegisterDto) {
+  async createUser(@Body() user: RegisterDto, @Res() res: Response) {
     try {
-      console.log(user);
-      
-      return await this.authService.createUser(user);
+      const data =  await this.authService.createUser(user);
+      return res.json({
+        success: true,
+        data
+      })
     } catch (error) {
-      if (error instanceof HttpException) {
-        throw error;
-      } else {
-        return { message: 'No se pudo crear usuario', error: error.message };
-      }
+      return res.json({
+        success: false,
+        message: error.message
+      })
     }
   }
 }
