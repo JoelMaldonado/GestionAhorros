@@ -1,0 +1,22 @@
+# Usa una imagen base de Node.js
+FROM node:14-alpine
+
+# Instala las herramientas necesarias para compilar bcrypt
+RUN apk add --no-cache \
+    build-base \
+    python3
+
+# Establece el directorio de trabajo en la carpeta de la aplicación
+WORKDIR /app
+
+# Copia los archivos de la aplicación al contenedor
+COPY . .
+
+# Instala las dependencias
+RUN npm install
+
+# Expone el puerto en el que la aplicación va a correr
+EXPOSE 3000
+
+# Comando para iniciar la aplicación
+CMD ["npm", "run", "start:prod"]
