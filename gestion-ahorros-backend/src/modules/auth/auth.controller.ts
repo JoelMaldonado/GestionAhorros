@@ -1,11 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, Res, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Post, Body, UseInterceptors } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import * as bcrypt from 'bcrypt';
-import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
-import { Response } from 'express';
 import { RegisterDto } from './dto/register.dto';
+import { TransformResponseInterceptor } from 'src/interceptors/transform_response_interceptor';
 
 @ApiBearerAuth()
 @ApiTags("Auth")
@@ -13,37 +11,15 @@ import { RegisterDto } from './dto/register.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
+  @UseInterceptors(TransformResponseInterceptor)
   @Post('login')
-  async login(@Body() loginDto: LoginDto, @Res() res: Response) {
-    try {
-      const token = await this.authService.login(loginDto)
-      return res.json({
-        success: true,
-        data: token
-      })
-    } catch (error) {
-      return res.json({
-        sucscess: false,
-        message: error.message
-      });
-    }
+  async login(@Body() loginDto: LoginDto) {
+    return await this.authService.login(loginDto)
   }
 
-
-
+  @UseInterceptors(TransformResponseInterceptor)
   @Post('register')
-  async createUser(@Body() user: RegisterDto, @Res() res: Response) {
-    try {
-      const data =  await this.authService.createUser(user);
-      return res.json({
-        success: true,
-        data
-      })
-    } catch (error) {
-      return res.json({
-        success: false,
-        message: error.message
-      })
-    }
+  async createUser(@Body() user: RegisterDto) {
+    return await this.authService.createUser(user);
   }
 }

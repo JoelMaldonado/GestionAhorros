@@ -8,6 +8,12 @@ data class LoginRequest(
     @SerializedName("password") val password: String
 )
 
+data class Wrapper<T>(
+    val success: Boolean?,
+    val message:String?,
+    val data: T?
+)
+
 data class LoginResponse(
     @SerializedName("token") val token: String?
 )

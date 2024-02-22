@@ -14,7 +14,12 @@ class AuthRepositoryImpl @Inject constructor(
             val body = LoginRequest(correo = usuario, password = clave)
             val call = api.login(body)
             if (call.isSuccessful) {
-                Result.success(call.body()?.token.toString())
+                if (call.body()?.success == true){
+                    Result.success(call.body()?.data?.token.toString())
+                } else {
+                    Log.d("tagito", "Entro")
+                    Result.failure(Exception(call.body()?.message.toString()))
+                }
             } else {
                 Result.failure(Exception(call.message()))
             }

@@ -23,13 +23,13 @@ export class AuthService {
     const user = await this.usuarioService.findUserByEmail(data.correo);
 
     if (!user) {
-      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
+      throw new Error('Usuario no encontrado');
     }
 
     const checkPass = await compare(data.password, user.clave);
 
     if (!checkPass){
-      throw new HttpException('Contraseña incorrecta', HttpStatus.FORBIDDEN);
+      throw new Error('Contraseña incorrecta');
     }
     const { id, nombre, correo } = user;
     const payload = { id, nombre, correo};
@@ -41,13 +41,11 @@ export class AuthService {
   }
 
   async createUser(data: RegisterDto) {
-
-    console.log(data);
     
       const userFound = await this.usuarioService.findUserByEmail(data.correo)
 
       if (userFound) {
-          throw new HttpException('Correo ya registrado', HttpStatus.CONFLICT)
+          throw new Error("Correo ya registrado")
       }
 
       const claveHash = await hash(data.clave, 10)

@@ -12,7 +12,7 @@ export class UsuarioService {
     ) { }
 
     async getAllUsers() {
-        return await this.userRepository.find()
+        return await this.userRepository.find();
     }
 
     async findUser(id: number) {
