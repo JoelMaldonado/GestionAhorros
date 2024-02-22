@@ -7,7 +7,6 @@ import { RegisterDto } from './dto/register.dto';
 import { Usuario } from 'src/entities/usuario.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { log } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -28,11 +27,11 @@ export class AuthService {
 
     const checkPass = await compare(data.password, user.clave);
 
-    if (!checkPass){
+    if (!checkPass) {
       throw new Error('Contraseña incorrecta');
     }
     const { id, nombre, correo } = user;
-    const payload = { id, nombre, correo};
+    const payload = { id, nombre, correo };
     const token = this.jwtService.sign(payload);
 
     return {
@@ -41,18 +40,22 @@ export class AuthService {
   }
 
   async createUser(data: RegisterDto) {
-    
-      const userFound = await this.usuarioService.findUserByEmail(data.correo)
 
-      if (userFound) {
-          throw new Error("Correo ya registrado")
-      }
+    const userFound = await this.usuarioService.findUserByEmail(data.correo)
 
-      const claveHash = await hash(data.clave, 10)
-      data.clave = claveHash
+    if (userFound) {
+      throw new Error("Correo ya registrado")
+    }
+
+    const claveHash = await hash(data.clave, 10)
+    data.clave = claveHash
 
 
-      const userCreate = this.userRepository.create(data)
-      return await this.userRepository.save(userCreate)
+    const userCreate = this.userRepository.create(data)
+    return await this.userRepository.save(userCreate)
+  }
+
+  async decodeToken(token: String) {
+    return this.jwtService.verify(token.replace('Bearer ', ''));
   }
 }

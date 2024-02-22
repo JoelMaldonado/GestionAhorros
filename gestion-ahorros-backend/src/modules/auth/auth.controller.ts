@@ -1,9 +1,11 @@
-import { Controller, Post, Body, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Body, UseInterceptors, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RegisterDto } from './dto/register.dto';
 import { TransformResponseInterceptor } from 'src/interceptors/transform_response_interceptor';
+import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
+import { Request } from 'express';
 
 @ApiBearerAuth()
 @ApiTags("Auth")
@@ -21,5 +23,12 @@ export class AuthController {
   @Post('register')
   async createUser(@Body() user: RegisterDto) {
     return await this.authService.createUser(user);
+  }
+
+  @UseInterceptors(TransformResponseInterceptor)
+  @UseGuards(JwtAuthGuard)
+  @Get('token')
+  async token(@Req() req:Request) {
+    return this.authService.decodeToken(req.headers.authorization)
   }
 }
