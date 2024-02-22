@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, isEnum } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, isEnum } from "class-validator";
 
 export class CreateCategoriaDto {
 
@@ -9,6 +9,12 @@ export class CreateCategoriaDto {
 
     @IsEnum(['Gasto', 'Ingreso'])
     tipo: 'Gasto' | 'Ingreso';
+
+    @IsNumber()
+    color: number;
+
+    @IsNumber()
+    icono: number;
 
     usuario:any
 

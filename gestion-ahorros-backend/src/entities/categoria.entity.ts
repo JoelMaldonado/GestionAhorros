@@ -10,13 +10,25 @@ export class Categoria {
     @Column({
         length: 50
     })
-    nombre?: string;
+    nombre: string;
 
     @Column({
         type: 'enum',
         enum: ['Gasto', 'Ingreso']
     })
     tipo?: 'Gasto' | 'Ingreso';
+
+    @Column({
+        type: 'int',
+        nullable: false
+    })
+    color: number;
+
+    @Column({
+        type: 'int',
+        nullable: false
+    })
+    icono: number;
 
     @Column({ default: true })
     activo: boolean;
