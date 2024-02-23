@@ -36,6 +36,7 @@ import com.jjmf.android.gestionahorros.util.show
 
 @Composable
 fun CuentasScreen(
+    toEdit:(id:Int?)->Unit,
     toAddCuenta: () -> Unit,
     viewModel: CuentasViewModel = hiltViewModel()
 ) {
@@ -73,7 +74,10 @@ fun CuentasScreen(
                     colors = CardDefaults.cardColors(
                         containerColor = it.color.color,
                         contentColor = Color.White
-                    )
+                    ),
+                    onClick = {
+                        toEdit(it.id)
+                    }
                 ) {
                     Column(
                         modifier = Modifier.fillMaxSize(),

@@ -11,6 +11,7 @@
 		5DC6AD642B8699100092CA51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6AD632B8699100092CA51 /* ContentView.swift */; };
 		5DC6AD662B8699110092CA51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6AD652B8699110092CA51 /* Assets.xcassets */; };
 		5DC6AD6A2B8699110092CA51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6AD692B8699110092CA51 /* Preview Assets.xcassets */; };
+		5DC6AD732B89151F0092CA51 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6AD722B89151F0092CA51 /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		5DC6AD652B8699110092CA51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC6AD672B8699110092CA51 /* GestionAhorrosSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GestionAhorrosSwift.entitlements; sourceTree = "<group>"; };
 		5DC6AD692B8699110092CA51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5DC6AD722B89151F0092CA51 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		5DC6AD602B8699100092CA51 /* GestionAhorrosSwift */ = {
 			isa = PBXGroup;
 			children = (
+				5DC6AD702B8914FF0092CA51 /* Presentation */,
 				5DC6AD612B8699100092CA51 /* GestionAhorrosSwiftApp.swift */,
 				5DC6AD632B8699100092CA51 /* ContentView.swift */,
 				5DC6AD652B8699110092CA51 /* Assets.xcassets */,
@@ -67,6 +70,22 @@
 				5DC6AD692B8699110092CA51 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5DC6AD702B8914FF0092CA51 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5DC6AD712B8915090092CA51 /* Menu */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		5DC6AD712B8915090092CA51 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				5DC6AD722B89151F0092CA51 /* MenuView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DC6AD642B8699100092CA51 /* ContentView.swift in Sources */,
+				5DC6AD732B89151F0092CA51 /* MenuView.swift in Sources */,
 				5DC6AD622B8699100092CA51 /* GestionAhorrosSwiftApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

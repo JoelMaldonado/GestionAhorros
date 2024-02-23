@@ -19,14 +19,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.jjmf.android.gestionahorros.ui.features.AddCategoria.AddCategoriaScreen
 import com.jjmf.android.gestionahorros.ui.features.AddCuenta.AddCuentaScreen
 import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.AddMovimientoScreen
 import com.jjmf.android.gestionahorros.ui.features.Categorias.CategoriasScreen
 import com.jjmf.android.gestionahorros.ui.features.Cuentas.CuentasScreen
+import com.jjmf.android.gestionahorros.ui.features.EditCuenta.EditCuentaScreen
 import com.jjmf.android.gestionahorros.ui.features.Inicio.InicioScreen
 import com.jjmf.android.gestionahorros.ui.features.Menu.components.MenuDrawer
 import com.jjmf.android.gestionahorros.ui.features.Preferencias.PreferenciasScreen
@@ -103,6 +106,10 @@ fun MenuScreen() {
                         toAddCuenta = {
                             navMenu.navigate(Rutas.AddCuenta.route)
                             title.value = "Añadir Cuenta"
+                        },
+                        toEdit = {
+                            navMenu.navigate(Rutas.EditCuenta.senID(it))
+                            title.value = "Editar Cuenta"
                         }
                     )
                 }
@@ -114,7 +121,7 @@ fun MenuScreen() {
                         }
                     )
                 }
-                composable(Rutas.Preferencias.route){
+                composable(Rutas.Preferencias.route) {
                     PreferenciasScreen()
                 }
                 composable(Rutas.AddMovimiento.route) {
@@ -138,6 +145,24 @@ fun MenuScreen() {
                             navMenu.popBackStack()
                         }
                     )
+                }
+
+                composable(
+                    route = Rutas.EditCuenta.route,
+                    arguments = listOf(
+                        navArgument("id") {
+                            type = NavType.IntType
+                        }
+                    )
+                ) {
+                    it.arguments?.getInt("id")?.let { id ->
+                        EditCuentaScreen(
+                            id = id,
+                            back = {
+                                navMenu.popBackStack()
+                            }
+                        )
+                    }
                 }
 
             }

@@ -1,0 +1,82 @@
+package com.jjmf.android.gestionahorros.ui.features.EditCuenta
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AccountBalance
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.jjmf.android.gestionahorros.core.Result
+import com.jjmf.android.gestionahorros.data.repository.CuentaRepository
+import com.jjmf.android.gestionahorros.domain.model.ColorCategoria
+import com.jjmf.android.gestionahorros.domain.model.Cuenta
+import com.jjmf.android.gestionahorros.domain.model.Icono
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class EditCuentaViewModel @Inject constructor(
+    private val repository: CuentaRepository
+) : ViewModel() {
+
+    var color by mutableStateOf(ColorCategoria(id = 1, Color(0xFF8B0000)))
+    var icono by mutableStateOf(Icono(id = 1, icon = Icons.Outlined.AccountBalance))
+    var sheetSelectIcono by mutableStateOf(false)
+    var sheetSelectColor by mutableStateOf(false)
+
+
+    var nombre by mutableStateOf("")
+
+    var back by mutableStateOf(false)
+    var isLoading by mutableStateOf(false)
+    var error by mutableStateOf<String?>(null)
+
+    fun save() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                isLoading = true
+                val cuenta = Cuenta(
+                    id = null,
+                    nombre = nombre,
+                    color = color,
+                    icono = icono,
+                    activo = true
+                )
+                when (val res = repository.insert(cuenta)) {
+                    is Result.Correcto -> back = true
+                    is Result.Error -> error = res.mensaje
+                }
+            } catch (e: Exception) {
+                error = e.message
+            } finally {
+                isLoading = false
+            }
+        }
+    }
+
+    fun getCuenta(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                when (val res = repository.getList()) {
+                    is Result.Correcto -> {
+                        res.datos?.find { it.id == id }?.let { cuenta ->
+
+                            nombre = cuenta.nombre ?: ""
+                            color = cuenta.color
+                            icono = cuenta.icono
+
+                        }
+                    }
+
+                    is Result.Error -> TODO()
+                }
+            } catch (e: Exception) {
+                error = e.message
+            }
+        }
+    }
+}

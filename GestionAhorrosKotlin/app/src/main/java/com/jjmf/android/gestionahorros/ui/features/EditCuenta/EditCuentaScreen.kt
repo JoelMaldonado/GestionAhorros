@@ -1,4 +1,4 @@
-package com.jjmf.android.gestionahorros.ui.features.AddCuenta
+package com.jjmf.android.gestionahorros.ui.features.EditCuenta
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,9 +18,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,16 +30,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jjmf.android.gestionahorros.ui.features.AddCategoria.components.SheetSelectColor
 import com.jjmf.android.gestionahorros.ui.features.AddCategoria.components.SheetSelectIcono
-import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.TipoMovimiento
 import com.jjmf.android.gestionahorros.ui.theme.ColorP7
 import com.jjmf.android.gestionahorros.util.show
 
 @Composable
-fun AddCuentaScreen(
+fun EditCuentaScreen(
+    id: Int,
     back: () -> Unit,
-    viewModel: AddCuentaViewModel = hiltViewModel()
+    viewModel: EditCuentaViewModel = hiltViewModel()
 ) {
-
 
     val context = LocalContext.current
 
@@ -53,20 +52,29 @@ fun AddCuentaScreen(
         viewModel.back = false
     }
 
+    LaunchedEffect(key1 = Unit){
+        viewModel.getCuenta(id)
+    }
+
     if (viewModel.sheetSelectIcono) {
-        SheetSelectIcono(close = {
-            viewModel.sheetSelectIcono = false
-        }, click = {
-            viewModel.icono = it
-        })
+        SheetSelectIcono(
+            close = {
+                viewModel.sheetSelectIcono = false
+            }, click = {
+                viewModel.icono = it
+            }
+        )
     }
 
     if (viewModel.sheetSelectColor) {
-        SheetSelectColor(close = {
-            viewModel.sheetSelectColor = false
-        }, click = {
-            viewModel.color = it
-        })
+        SheetSelectColor(
+            close = {
+                viewModel.sheetSelectColor = false
+            },
+            click = {
+                viewModel.color = it
+            }
+        )
     }
 
     Column(

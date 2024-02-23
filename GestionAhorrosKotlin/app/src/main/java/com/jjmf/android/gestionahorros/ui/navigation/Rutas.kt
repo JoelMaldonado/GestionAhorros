@@ -12,4 +12,7 @@ sealed class Rutas(val route:String) {
     data object AddMovimiento: Rutas("add_movimiento")
     data object AddCategoria: Rutas("add_categoria")
     data object AddCuenta: Rutas("add_cuenta")
+    data object EditCuenta: Rutas("edit_cuenta?{id}"){
+        fun senID(id:Int?) = "edit_cuenta?$id"
+    }
 }
