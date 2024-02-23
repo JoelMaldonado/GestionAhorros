@@ -1,6 +1,9 @@
 package com.jjmf.android.gestionahorros.data.module
 
+import com.jjmf.android.gestionahorros.app.BaseApp.Companion.prefs
 import com.jjmf.android.gestionahorros.data.service.ApiService
+import com.jjmf.android.gestionahorros.data.service.CategoriaService
+import com.jjmf.android.gestionahorros.data.service.CuentaService
 import com.jjmf.android.gestionahorros.util.Constantes
 import dagger.Module
 import dagger.Provides
@@ -25,17 +28,45 @@ object NetworkModule {
         okHttpClient.addInterceptor(interceptor)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
+
+        val token = prefs.getToken()
+
+        okHttpClient.addInterceptor { chain ->
+            val request = chain.request().newBuilder()
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+            chain.proceed(request)
+        }
+
         return okHttpClient.build()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofit(client: OkHttpClient): ApiService {
+    fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constantes.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-            .create(ApiService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCategoriaService(retrofit: Retrofit): CategoriaService {
+        return retrofit.create(CategoriaService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCuentaService(retrofit: Retrofit): CuentaService {
+        return retrofit.create(CuentaService::class.java)
+    }
+
 }

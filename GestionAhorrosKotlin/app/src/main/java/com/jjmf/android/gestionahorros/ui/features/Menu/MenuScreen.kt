@@ -14,17 +14,22 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.jjmf.android.gestionahorros.ui.features.AddCategoria.AddCategoriaScreen
+import com.jjmf.android.gestionahorros.ui.features.AddCuenta.AddCuentaScreen
 import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.AddMovimientoScreen
 import com.jjmf.android.gestionahorros.ui.features.Categorias.CategoriasScreen
 import com.jjmf.android.gestionahorros.ui.features.Cuentas.CuentasScreen
 import com.jjmf.android.gestionahorros.ui.features.Inicio.InicioScreen
 import com.jjmf.android.gestionahorros.ui.features.Menu.components.MenuDrawer
+import com.jjmf.android.gestionahorros.ui.features.Preferencias.PreferenciasScreen
 import com.jjmf.android.gestionahorros.ui.navigation.Rutas
 import com.jjmf.android.gestionahorros.ui.theme.ColorP1
 import com.jjmf.android.gestionahorros.ui.theme.ColorP2
@@ -33,6 +38,10 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuScreen() {
+
+    val title = remember {
+        mutableStateOf("Inicio")
+    }
 
     val navMenu = rememberNavController()
 
@@ -49,6 +58,7 @@ fun MenuScreen() {
                     }
                     ruta?.let {
                         navMenu.navigate(it.route)
+                        title.value = it.route
                     }
                 }
             )
@@ -70,7 +80,7 @@ fun MenuScreen() {
                     }
                 },
                 title = {
-                    Text(text = "Inicio")
+                    Text(text = title.value)
                 },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
                     containerColor = ColorP1,
@@ -84,12 +94,52 @@ fun MenuScreen() {
                     InicioScreen(
                         toAddRegistro = {
                             navMenu.navigate(Rutas.AddMovimiento.route)
+                            title.value = "Añadir Registro"
                         }
                     )
                 }
-                composable(Rutas.Cuentas.route) { CuentasScreen() }
-                composable(Rutas.Categorias.route) { CategoriasScreen() }
-                composable(Rutas.AddMovimiento.route) { AddMovimientoScreen() }
+                composable(Rutas.Cuentas.route) {
+                    CuentasScreen(
+                        toAddCuenta = {
+                            navMenu.navigate(Rutas.AddCuenta.route)
+                            title.value = "Añadir Cuenta"
+                        }
+                    )
+                }
+                composable(Rutas.Categorias.route) {
+                    CategoriasScreen(
+                        toAddCategoria = {
+                            navMenu.navigate(Rutas.AddCategoria.route)
+                            title.value = "Añadir Categoria"
+                        }
+                    )
+                }
+                composable(Rutas.Preferencias.route){
+                    PreferenciasScreen()
+                }
+                composable(Rutas.AddMovimiento.route) {
+                    AddMovimientoScreen()
+                }
+                composable(
+                    route = Rutas.AddCategoria.route
+                ) {
+                    AddCategoriaScreen(
+                        back = {
+                            navMenu.popBackStack()
+                        }
+                    )
+                }
+
+                composable(
+                    route = Rutas.AddCuenta.route
+                ) {
+                    AddCuentaScreen(
+                        back = {
+                            navMenu.popBackStack()
+                        }
+                    )
+                }
+
             }
         }
     }

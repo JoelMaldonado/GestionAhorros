@@ -57,7 +57,7 @@ fun MenuDrawer(
 
         NavigationDrawerItem(
             icon = {
-                   Icon(imageVector = Icons.AutoMirrored.Filled.Logout, contentDescription = null)
+                Icon(imageVector = Icons.AutoMirrored.Filled.Logout, contentDescription = null)
             },
             label = { Text(text = "Cerrar Sesión") },
             selected = false,

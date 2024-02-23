@@ -12,5 +12,5 @@ enum class MenuTab(val icon: ImageVector, val ruta: Rutas?) {
     Inicio(icon = Icons.Outlined.Home, ruta = Rutas.Inicio),
     Cuentas(icon = Icons.Outlined.CreditCard, ruta = Rutas.Cuentas),
     Categorias(icon = Icons.Outlined.ShoppingBag, ruta = Rutas.Categorias),
-    Preferencias(icon = Icons.Outlined.Settings, ruta = null)
+    Preferencias(icon = Icons.Outlined.Settings, ruta = Rutas.Preferencias)
 }

@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.DirectionsBus
+import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,12 +23,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jjmf.android.gestionahorros.domain.model.Categoria
-
+import com.jjmf.android.gestionahorros.domain.model.Cuenta
+import com.jjmf.android.gestionahorros.ui.theme.ColorP1
 
 @Composable
-fun SelectCategoria(
-    list: List<Categoria>
+fun SelectCuenta(
+    list: List<Cuenta>
 ) {
 
     val select = remember { mutableIntStateOf(0) }
@@ -46,7 +46,7 @@ fun SelectCategoria(
                 Column(
                     modifier = Modifier.size(80.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(if (select.intValue == it.id) it.color.color else it.color.color.copy(0.3f))
+                        .background(if (select.intValue == it.id) ColorP1 else ColorP1.copy(0.3f))
                         .clickable {
                             select.intValue = it.id ?: 0
                         },
@@ -56,7 +56,7 @@ fun SelectCategoria(
 
                     Icon(
                         modifier = Modifier.size(40.dp),
-                        imageVector = it.icono.icon,
+                        imageVector = Icons.Default.CreditCard,
                         contentDescription = null,
                         tint = Color.White
                     )
@@ -69,4 +69,5 @@ fun SelectCategoria(
             }
         }
     }
+
 }

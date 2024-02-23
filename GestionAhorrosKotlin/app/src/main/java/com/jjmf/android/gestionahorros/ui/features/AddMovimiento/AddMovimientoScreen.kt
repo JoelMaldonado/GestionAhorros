@@ -12,9 +12,11 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,12 +30,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.components.SelectCategoria
+import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.components.SelectCuenta
 
 @Composable
 fun AddMovimientoScreen(
     viewModel: AddMovimientoViewModel = hiltViewModel()
 ) {
     val isFocused = remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getListCategorias()
+        viewModel.getListCuentas()
+    }
 
     Column(
         modifier = Modifier
@@ -95,17 +103,26 @@ fun AddMovimientoScreen(
 
         }
 
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Cuenta", color = Color.Gray, fontSize = 14.sp)
-        }
+        SelectCuenta(
+            list = viewModel.listCuentas
+        )
 
-        SelectCategoria()
+        SelectCategoria(
+            list = viewModel.listCategorias.filter { it.tipo == viewModel.tipo }
+        )
+
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Detalle", color = Color.Gray, fontSize = 14.sp)
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = viewModel.detalle,
+                onValueChange = { viewModel.detalle = it },
+                label = {
+                    Text(text = "Ingrese un detalle")
+                }
+            )
         }
         Column(
             modifier = Modifier.fillMaxWidth()

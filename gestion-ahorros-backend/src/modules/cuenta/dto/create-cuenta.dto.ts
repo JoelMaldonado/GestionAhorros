@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateCuentaDto {
     
@@ -6,4 +6,10 @@ export class CreateCuentaDto {
     @IsNotEmpty()
     nombre: string;
     
+    @IsNumber()
+    color: number;
+
+    @IsNumber()
+    icono: number;
+
 }

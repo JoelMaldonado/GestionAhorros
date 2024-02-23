@@ -11,6 +11,18 @@ export class Cuenta {
         length: 50
     })
     nombre: string;
+    
+    @Column({
+        type: 'int',
+        nullable: false
+    })
+    color: number;
+
+    @Column({
+        type: 'int',
+        nullable: false
+    })
+    icono: number;
 
     @Column({ default: true })
     activo: boolean;
