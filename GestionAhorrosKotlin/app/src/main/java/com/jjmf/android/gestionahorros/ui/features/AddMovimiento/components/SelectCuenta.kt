@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CreditCard
@@ -36,17 +38,16 @@ fun SelectCuenta(
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(text = "Categoría", color = Color.Gray, fontSize = 14.sp)
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(4),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+        Text(text = "Cuenta", color = Color.Gray, fontSize = 14.sp)
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(list) {
                 Column(
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier.size(90.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(if (select.intValue == it.id) ColorP1 else ColorP1.copy(0.3f))
+                        .background(if (select.intValue == it.id) it.color.color else it.color.color.copy(0.3f))
                         .clickable {
                             select.intValue = it.id ?: 0
                         },
@@ -56,7 +57,7 @@ fun SelectCuenta(
 
                     Icon(
                         modifier = Modifier.size(40.dp),
-                        imageVector = Icons.Default.CreditCard,
+                        imageVector = it.icono.icon,
                         contentDescription = null,
                         tint = Color.White
                     )

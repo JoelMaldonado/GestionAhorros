@@ -1,5 +1,6 @@
 package com.jjmf.android.gestionahorros.ui.features.AddMovimiento
 
+import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
@@ -22,6 +23,8 @@ class AddMovimientoViewModel @Inject constructor(
     private val repoCategoria: CategoriaRepository,
     private val repoCuenta: CuentaRepository
 ) : ViewModel() {
+    var foto1 by mutableStateOf<Uri?>(null)
+    var foto2 by mutableStateOf<Uri?>(null)
     var detalle by mutableStateOf("")
     var tipo by mutableStateOf(TipoMovimiento.Gasto)
     var monto by mutableStateOf("")
