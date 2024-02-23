@@ -12,6 +12,7 @@ import com.jjmf.android.gestionahorros.core.Result
 import com.jjmf.android.gestionahorros.data.repository.CuentaRepository
 import com.jjmf.android.gestionahorros.domain.model.Categoria
 import com.jjmf.android.gestionahorros.domain.model.ColorCategoria
+import com.jjmf.android.gestionahorros.domain.model.Cuenta
 import com.jjmf.android.gestionahorros.domain.model.Icono
 import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.TipoMovimiento
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +42,17 @@ class AddCuentaViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO){
             try {
                 isLoading = true
-
+                val cuenta = Cuenta(
+                    id = null,
+                    nombre = nombre,
+                    color = color,
+                    icono = icono,
+                    activo = true
+                )
+                when(val res = repository.insert(cuenta)){
+                    is Result.Correcto -> back = true
+                    is Result.Error -> error = res.mensaje
+                }
             }catch (e:Exception){
                 error = e.message
             }finally {

@@ -12,13 +12,8 @@ export class CuentaService {
     @InjectRepository(Cuenta) private repo: Repository<Cuenta>
   ){}
 
-  async create(user:any, createCuentaDto: CreateCuentaDto) {
-    
-    const create = this.repo.create({
-      nombre: createCuentaDto.nombre,
-      usuario: user.id,
-    })
-
+  async create(createCuentaDto: CreateCuentaDto) {
+    const create = this.repo.create(createCuentaDto)
     return await this.repo.save(create);
   }
 

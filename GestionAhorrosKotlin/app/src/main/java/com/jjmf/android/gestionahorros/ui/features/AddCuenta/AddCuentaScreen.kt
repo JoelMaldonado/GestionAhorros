@@ -87,7 +87,7 @@ fun AddCuentaScreen(
                 Text(text = "Nombre")
             }
         )
-        
+
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {

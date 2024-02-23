@@ -16,9 +16,9 @@ export class CuentaController {
   @UseInterceptors(TransformResponseInterceptor)
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createCuentaDto: CreateCuentaDto, @Req() req: Request) {
-    const user = req.user;
-    return this.cuentaService.create(user, createCuentaDto);
+  create(@Body() createCuentaDto: CreateCuentaDto, @Req() req) {
+    createCuentaDto.usuario = req.user.id;
+    return this.cuentaService.create(createCuentaDto);
   }
 
   @UseInterceptors(TransformResponseInterceptor)

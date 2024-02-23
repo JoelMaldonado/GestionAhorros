@@ -23,4 +23,22 @@ class CuentaRepositoryImpl @Inject constructor(
             Result.Error(e.message)
         }
     }
+
+    override suspend fun insert(data: Cuenta): Result<String> {
+        return try {
+            val call = api.insert(data.toDto())
+            if (call.isSuccessful){
+                val body = call.body()
+                if (body?.isSuccess == true){
+                    Result.Correcto("Se inserto")
+                }else{
+                    Result.Error(body?.message)
+                }
+            } else {
+                Result.Error(call.message())
+            }
+        }catch (e:Exception){
+            Result.Error(e.message)
+        }
+    }
 }

@@ -36,7 +36,7 @@ import com.jjmf.android.gestionahorros.util.show
 
 @Composable
 fun CuentasScreen(
-    toAddCuenta: ()->Unit,
+    toAddCuenta: () -> Unit,
     viewModel: CuentasViewModel = hiltViewModel()
 ) {
 
@@ -71,7 +71,7 @@ fun CuentasScreen(
                 Card(
                     modifier = Modifier.size(80.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = ColorP1,
+                        containerColor = it.color.color,
                         contentColor = Color.White
                     )
                 ) {
@@ -81,7 +81,7 @@ fun CuentasScreen(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Icon(
-                            imageVector = Icons.Default.CreditCard,
+                            imageVector = it.icono.icon,
                             contentDescription = null,
                             modifier = Modifier.size(40.dp)
                         )
