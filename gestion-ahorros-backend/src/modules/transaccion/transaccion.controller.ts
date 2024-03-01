@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFile, Query, Res } from '@nestjs/common';
 import { TransaccionService } from './transaccion.service';
 import { CreateTransaccionDto } from './dto/create-transaccion.dto';
 import { UpdateTransaccionDto } from './dto/update-transaccion.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
 import { TransformResponseInterceptor } from 'src/interceptors/transform_response_interceptor';
+import { FileInterceptor } from '@nestjs/platform-express';
+
 
 @ApiBearerAuth()
 @ApiTags("Transacción")
@@ -15,15 +17,17 @@ export class TransaccionController {
   @UseInterceptors(TransformResponseInterceptor)
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createTransaccionDto: CreateTransaccionDto) {
-    return this.transaccionService.create(createTransaccionDto);
+  @UseInterceptors(FileInterceptor('imagen'))
+  create(@UploadedFile() imagen) {
+    const fs = require('fs');
+    fs.writeFileSync(`assets/images/transacs/${imagen.originalname}`, imagen.buffer);
+    return { mensaje: 'Imagen subida exitosamente' };
   }
 
   @UseInterceptors(TransformResponseInterceptor)
-  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.transaccionService.findAll();
+  findAll(@Res() res, @Query('url') url: string) {
+   return this.transaccionService.findAll
   }
 
   @UseInterceptors(TransformResponseInterceptor)

@@ -12,5 +12,6 @@ export class CreateCuentaDto {
     @IsNumber()
     icono: number;
 
-    usuario:any
+    usuario:any;
+    
 }

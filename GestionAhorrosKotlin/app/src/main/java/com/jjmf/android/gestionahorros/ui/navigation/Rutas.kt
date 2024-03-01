@@ -7,7 +7,9 @@ sealed class Rutas(val route:String) {
     data object Inicio: Rutas("Inicio")
     data object Cuentas: Rutas("Cuentas")
     data object Categorias: Rutas("Categorias")
-    data object Preferencias: Rutas("Preferencias")
+    data object Preferencias: Rutas("Preferencias") {
+        data object Idioma: Rutas("prefs_idioma")
+    }
 
     data object AddMovimiento: Rutas("add_movimiento")
     data object AddCategoria: Rutas("add_categoria")

@@ -4,6 +4,7 @@ import com.jjmf.android.gestionahorros.app.BaseApp.Companion.prefs
 import com.jjmf.android.gestionahorros.data.service.ApiService
 import com.jjmf.android.gestionahorros.data.service.CategoriaService
 import com.jjmf.android.gestionahorros.data.service.CuentaService
+import com.jjmf.android.gestionahorros.data.service.ImageService
 import com.jjmf.android.gestionahorros.util.Constantes
 import dagger.Module
 import dagger.Provides
@@ -67,6 +68,11 @@ object NetworkModule {
     @Provides
     fun provideCuentaService(retrofit: Retrofit): CuentaService {
         return retrofit.create(CuentaService::class.java)
+    }
+    @Singleton
+    @Provides
+    fun provideImageService(retrofit: Retrofit): ImageService {
+        return retrofit.create(ImageService::class.java)
     }
 
 }

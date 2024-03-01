@@ -1,5 +1,4 @@
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException, HttpStatus, ValidationError } from "@nestjs/common";
-import e from "express";
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler, HttpException, HttpStatus } from "@nestjs/common";
 import { Observable, catchError, map, throwError } from "rxjs";
 
 @Injectable()

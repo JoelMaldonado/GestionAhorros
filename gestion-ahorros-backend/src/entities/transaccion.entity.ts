@@ -31,19 +31,7 @@ export class Transaccion {
         length: 50,
         nullable: true
     })
-    foto1?: string;
-
-    @Column({
-        length: 50,
-        nullable: true
-    })
-    foto2?: string;
-
-    @Column({
-        length: 50,
-        nullable: true
-    })
-    foto3?: string;
+    foto?: string;
 
     @Column({ default: true })
     activo: boolean;

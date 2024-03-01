@@ -5,6 +5,7 @@ import { TransaccionModule } from './modules/transaccion/transaccion.module';
 import { CuentaModule } from './modules/cuenta/cuenta.module';
 import { CategoriaModule } from './modules/categoria/categoria.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ImageModule } from './modules/image/image.module';
 import typeOrmConfig from './config/typeorm.config';
 
 @Module({
@@ -15,6 +16,7 @@ import typeOrmConfig from './config/typeorm.config';
     CuentaModule,
     CategoriaModule,
     AuthModule,
+    ImageModule,
     
   ],
   controllers: [],

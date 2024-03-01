@@ -18,3 +18,6 @@ val ColorS3 = Color(0xFFffd146)
 val ColorS4 = Color(0xFFffe585)
 
 val ColorTitulo = Color(0xFF163355)
+
+
+val ColorFondo = Color(0xFFF0F0F0)

@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D2473862B91248E00EBCDB2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473852B91248E00EBCDB2 /* HomeView.swift */; };
+		5D2473892B91250E00EBCDB2 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473882B91250E00EBCDB2 /* View+Extensions.swift */; };
+		5D24738B2B91252000EBCDB2 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24738A2B91252000EBCDB2 /* Date+Extensions.swift */; };
+		5D24738E2B91255400EBCDB2 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24738D2B91255400EBCDB2 /* CardView.swift */; };
+		5D2473912B91257C00EBCDB2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473902B91257C00EBCDB2 /* Category.swift */; };
+		5D2473932B9125A200EBCDB2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473922B9125A200EBCDB2 /* Constants.swift */; };
+		5D2473952B9125C100EBCDB2 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473942B9125C100EBCDB2 /* Transaction.swift */; };
+		5D2473972B9125D900EBCDB2 /* CardTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473962B9125D900EBCDB2 /* CardTransaction.swift */; };
+		5D2473992B91260700EBCDB2 /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473982B91260700EBCDB2 /* TintColor.swift */; };
+		5D24739B2B9126B100EBCDB2 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24739A2B9126B100EBCDB2 /* Tab.swift */; };
+		5D24739E2B91271800EBCDB2 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24739D2B91271800EBCDB2 /* IntroScreen.swift */; };
+		5D2473A12B91285300EBCDB2 /* PreferenciasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2473A02B91285300EBCDB2 /* PreferenciasView.swift */; };
 		5DC6AD622B8699100092CA51 /* GestionAhorrosSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6AD612B8699100092CA51 /* GestionAhorrosSwiftApp.swift */; };
 		5DC6AD642B8699100092CA51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6AD632B8699100092CA51 /* ContentView.swift */; };
 		5DC6AD662B8699110092CA51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6AD652B8699110092CA51 /* Assets.xcassets */; };
@@ -15,6 +27,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D2473852B91248E00EBCDB2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		5D2473882B91250E00EBCDB2 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		5D24738A2B91252000EBCDB2 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		5D24738D2B91255400EBCDB2 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		5D2473902B91257C00EBCDB2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5D2473922B9125A200EBCDB2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5D2473942B9125C100EBCDB2 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		5D2473962B9125D900EBCDB2 /* CardTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTransaction.swift; sourceTree = "<group>"; };
+		5D2473982B91260700EBCDB2 /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
+		5D24739A2B9126B100EBCDB2 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		5D24739D2B91271800EBCDB2 /* IntroScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreen.swift; sourceTree = "<group>"; };
+		5D2473A02B91285300EBCDB2 /* PreferenciasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenciasView.swift; sourceTree = "<group>"; };
 		5DC6AD5E2B8699100092CA51 /* GestionAhorrosSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestionAhorrosSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC6AD612B8699100092CA51 /* GestionAhorrosSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestionAhorrosSwiftApp.swift; sourceTree = "<group>"; };
 		5DC6AD632B8699100092CA51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +59,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D2473832B91247300EBCDB2 /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				5D24739F2B91284500EBCDB2 /* Preferencias */,
+				5D2473842B91248000EBCDB2 /* Home */,
+			);
+			path = TabViews;
+			sourceTree = "<group>";
+		};
+		5D2473842B91248000EBCDB2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5D24738C2B91253E00EBCDB2 /* Components */,
+				5D2473852B91248E00EBCDB2 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		5D2473872B91250200EBCDB2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5D2473882B91250E00EBCDB2 /* View+Extensions.swift */,
+				5D24738A2B91252000EBCDB2 /* Date+Extensions.swift */,
+				5D2473922B9125A200EBCDB2 /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5D24738C2B91253E00EBCDB2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5D24738D2B91255400EBCDB2 /* CardView.swift */,
+				5D2473962B9125D900EBCDB2 /* CardTransaction.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5D24738F2B91257400EBCDB2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5D2473902B91257C00EBCDB2 /* Category.swift */,
+				5D2473942B9125C100EBCDB2 /* Transaction.swift */,
+				5D2473982B91260700EBCDB2 /* TintColor.swift */,
+				5D24739A2B9126B100EBCDB2 /* Tab.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5D24739C2B91270800EBCDB2 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				5D24739D2B91271800EBCDB2 /* IntroScreen.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		5D24739F2B91284500EBCDB2 /* Preferencias */ = {
+			isa = PBXGroup;
+			children = (
+				5D2473A02B91285300EBCDB2 /* PreferenciasView.swift */,
+			);
+			path = Preferencias;
+			sourceTree = "<group>";
+		};
 		5DC6AD552B8699100092CA51 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +142,8 @@
 		5DC6AD602B8699100092CA51 /* GestionAhorrosSwift */ = {
 			isa = PBXGroup;
 			children = (
+				5D24738F2B91257400EBCDB2 /* Model */,
+				5D2473872B91250200EBCDB2 /* Helpers */,
 				5DC6AD702B8914FF0092CA51 /* Presentation */,
 				5DC6AD612B8699100092CA51 /* GestionAhorrosSwiftApp.swift */,
 				5DC6AD632B8699100092CA51 /* ContentView.swift */,
@@ -75,6 +165,8 @@
 		5DC6AD702B8914FF0092CA51 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5D24739C2B91270800EBCDB2 /* Intro */,
+				5D2473832B91247300EBCDB2 /* TabViews */,
 				5DC6AD712B8915090092CA51 /* Menu */,
 			);
 			path = Presentation;
@@ -158,9 +250,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D24738E2B91255400EBCDB2 /* CardView.swift in Sources */,
 				5DC6AD642B8699100092CA51 /* ContentView.swift in Sources */,
+				5D2473A12B91285300EBCDB2 /* PreferenciasView.swift in Sources */,
+				5D24739E2B91271800EBCDB2 /* IntroScreen.swift in Sources */,
+				5D2473862B91248E00EBCDB2 /* HomeView.swift in Sources */,
 				5DC6AD732B89151F0092CA51 /* MenuView.swift in Sources */,
+				5D2473992B91260700EBCDB2 /* TintColor.swift in Sources */,
+				5D2473952B9125C100EBCDB2 /* Transaction.swift in Sources */,
+				5D2473892B91250E00EBCDB2 /* View+Extensions.swift in Sources */,
+				5D24739B2B9126B100EBCDB2 /* Tab.swift in Sources */,
 				5DC6AD622B8699100092CA51 /* GestionAhorrosSwiftApp.swift in Sources */,
+				5D24738B2B91252000EBCDB2 /* Date+Extensions.swift in Sources */,
+				5D2473972B9125D900EBCDB2 /* CardTransaction.swift in Sources */,
+				5D2473912B91257C00EBCDB2 /* Category.swift in Sources */,
+				5D2473932B9125A200EBCDB2 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

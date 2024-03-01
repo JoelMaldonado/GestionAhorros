@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Wallas</string>
+    <string name="cuentas">Cuentas</string>
+    <string name="categorias">Categorias</string>
+    <string name="moneda">Moneda</string>
+    <string name="idioma">Idioma y Moneda</string>
+    <string name="centro_mensajes">Centro de mensajes</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="eliminar_cuenta">Eliminar Cuenta</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="espanol">Español</string>
+    <string name="ingles">Ingles</string>
+    <string name="select_opcion">Selecciona una opción</string>
+    <string name="ingresos">Ingresos</string>
 </resources>

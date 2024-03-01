@@ -1,10 +1,12 @@
 package com.jjmf.android.gestionahorros.ui.features.AddMovimiento
 
 import android.Manifest
-import android.util.Log
+import android.content.ContentValues
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -37,43 +39,53 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.components.SelectCategoria
 import com.jjmf.android.gestionahorros.ui.features.AddMovimiento.components.SelectCuenta
-import com.jjmf.android.gestionahorros.ui.theme.ColorP1
+import com.jjmf.android.gestionahorros.util.show
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun AddMovimientoScreen(
     viewModel: AddMovimientoViewModel = hiltViewModel()
 ) {
 
-    val permisos = rememberMultiplePermissionsState(
-        permissions = listOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-    )
+    val context = LocalContext.current
 
-    val imageLauncher1 = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
+    val uri = remember { mutableStateOf<Uri?>(null) }
+
+    val cameraLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicture(),
         onResult = {
-            viewModel.foto1 = it
+            if (it && uri.value != null) {
+                viewModel.foto = uri.value
+            }
         }
     )
-    val imageLauncher2 = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
+
+    val cameraPermiso = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
         onResult = {
-            viewModel.foto2 = it
+            when (it) {
+                true -> {
+                    uri.value = context.contentResolver.insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        ContentValues()
+                    )
+                    cameraLauncher.launch(uri.value)
+                }
+
+                false -> {
+                    context.show("Debes aceptar los permisos de la camara")
+                }
+            }
         }
     )
 
@@ -83,7 +95,6 @@ fun AddMovimientoScreen(
     LaunchedEffect(key1 = Unit) {
         viewModel.getListCategorias()
         viewModel.getListCuentas()
-        permisos.launchMultiplePermissionRequest()
     }
 
     Column(
@@ -100,21 +111,29 @@ fun AddMovimientoScreen(
             Spacer(modifier = Modifier.weight(1f))
             RadioButton(
                 selected = viewModel.tipo == TipoMovimiento.Ingreso,
-                onClick = { viewModel.tipo = TipoMovimiento.Ingreso }
+                onClick = {
+                    viewModel.tipo = TipoMovimiento.Ingreso
+                }
             )
             Text(text = "Ingreso")
+
             Spacer(modifier = Modifier.weight(1f))
+
             RadioButton(
                 selected = viewModel.tipo == TipoMovimiento.Gasto,
-                onClick = { viewModel.tipo = TipoMovimiento.Gasto }
+                onClick = {
+                    viewModel.tipo = TipoMovimiento.Gasto
+                }
             )
+
             Text(text = "Gasto")
+
             Spacer(modifier = Modifier.weight(1f))
+
         }
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth(0.3f),
+            modifier = Modifier.fillMaxWidth(0.3f),
             contentAlignment = Alignment.Center
         ) {
             if (viewModel.monto.isEmpty() && !isFocused.value) {
@@ -182,32 +201,24 @@ fun AddMovimientoScreen(
                         .clip(RoundedCornerShape(12.dp))
                         .background(Color.LightGray)
                         .clickable {
-                            imageLauncher1.launch("image/*")
+                            if (
+                                ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.CAMERA
+                                ) == PackageManager.PERMISSION_GRANTED
+                            ) {
+                                uri.value = context.contentResolver.insert(
+                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                    ContentValues()
+                                )
+                                cameraLauncher.launch(uri.value)
+                            } else {
+                                cameraPermiso.launch(Manifest.permission.CAMERA)
+                            }
                         },
                     contentAlignment = Alignment.Center
                 ) {
-                    viewModel.foto1?.let { uri ->
-                        AsyncImage(
-                            model = uri,
-                            contentDescription = null,
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-                    } ?: run {
-                        Icon(imageVector = Icons.Default.Image, contentDescription = null)
-                    }
-                }
-                Box(
-                    modifier = Modifier
-                        .size(90.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(Color.LightGray)
-                        .clickable {
-                            imageLauncher2.launch("image/*")
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    viewModel.foto2?.let { uri ->
+                    viewModel.foto?.let { uri ->
                         AsyncImage(
                             model = uri,
                             contentDescription = null,
@@ -222,9 +233,7 @@ fun AddMovimientoScreen(
         }
 
         Button(
-            onClick = {
-
-            }
+            onClick = viewModel::save
         ) {
             Text(text = "Guardar")
         }
