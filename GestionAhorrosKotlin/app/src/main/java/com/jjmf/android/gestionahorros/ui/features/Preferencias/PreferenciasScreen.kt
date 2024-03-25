@@ -51,12 +51,6 @@ fun PreferenciasScreen(
     viewModel: PreferenciasViewModel = hiltViewModel()
 ) {
 
-    val d = try {
-        Currency.getInstance(Locale.getDefault()).displayName
-    }catch (e:Exception){
-        "Error"
-    }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
